@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/radio-button.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <style>
+        /********************************************
+        * Now Loading
+        ********************************************/
+        #overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px #ddd solid;
+            border-top: 4px #999 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(359deg); }
+        }
+        .is-hide{
+            display:none;
+        }
+
+        /*下スクロール*/
+        div#scroll {
+            height: 400px;
+            width: 50%;
+            padding: 10px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin: 30px;
+            border: 3px solid #CCC;
+            -webkit-overflow-scrolling: touch;
+            background-color: white;
+        }
+        .item {
+            display: inline-block;
+            margin: 6px;
+        }
+
+        .selecting{
+            position: relative;
+            border: solid 5px #696969;
+            height: 250px;
+            width: 300px;
+            padding: 30px;
+        }
+
+        .choise-img{/*選択した画像*/
+            display: inline-block;
+            background: rgba(255, 0, 0, 0.4);
+            text-align: right;
+            /*width: 100%;*/
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            -webkit-transform : translate(-50%,-50%);
+            transform : translate(-50%,-50%);
+        }
+
+
+        a.main-title:link, a.main-title:visited, a.main-title:hover, a.main-title:active {
+            /*メインタイトル（推薦システム）*/
+            font-family: "Rounded Mplus 1c";
+            font-weight: 500;
+            color: white;
+            text-decoration:none;
+            font-size: 24px;
+        }
+
+        .box-title{/*文字*/
+            font-size: 25px;
+            font-family: "Rounded Mplus 1c";/*var(--bs-font-monospace)!important*/
+            display: inline-block;
+            /*left: 10px;*/
+            line-height: 1;
+            background: #FFF;
+            /*color: #95ccff;*/
+            color : #696969;
+            font-weight: bold;
+        }
+
+        /*送信ボタン　の位置*/
+        .button-div{
+            position: relative; /* 今の位置を基準 */
+            top: -220px; /* 上から10px */
+        }
+        /*ページ全体の調整*/
+        plate,html,body{
+            height: 100%;
+            width:100%;
+            font-size : 100%;
+            margin-left : auto;
+            margin-right : auto;
+            text-align : center;
+            background-color: rgb(229, 226, 226);
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        /*ボタン実験*/
+
+        .flat.border {
+        position: relative;
+        text-align: center;
+        /* 中央揃え */
+        display: block;
+        margin: 0 auto;
+        /* 幅の指定 */
+        width: 100%;
+        height: 60px;
+        max-width: 600px;
+        box-sizing: border-box;
+        padding: 10px;
+        /* 色の指定 */
+        background: linear-gradient(135deg, #0066ff, #0066ff);
+        color: #fff;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        border: 2px solid #0066ff;
+        background: #fff;/*デフォルトのボタンの色*/
+        color: #0066ff;
+        font-size: 23px;
+        font-family: "Rounded Mplus 1c";
+        }
+        .flat.border:hover {
+        /*マウスを近づけたときの色*/
+        background: #0066ff;
+        color: #fff;
+        }
+        .flat.border:active, .flat.border:focus {
+        top: 2px;
+        }
+
+        .scroll-pos{
+            background-color: red; 
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            left: 10%;
+        }
+
+    </style>
+
+
+    <title>家具推薦システム</title>
+    </head>
+<body>  
+<header>
+    <div class="navbar navbar-dark bg-dark shadow-sm" style="line-height: 2.00;">
+        <div class="container">
+            <div class="navbar-brand d-flex align-items-center">
+                <a href="/" class="main-title">家具推薦システム</a>
+            </div>
+            <!--
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a href="/material" class="btn btn-outline-light">テクスチャ調査システム</a>
+            </div>
+            -->
+
+        </div>
+    </div>
+</header>
+
+<!-- loding -->
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+
+<div class="modal fade" id="dlog">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-warning" role="alert">
+            机と雰囲気を選択してください
+        </div>
+    </div>
+</div>
+<button type="button" id="NotifyMassage" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dlog" hidden></button>
+
+
+<main>
+    <div id="scroll" class="scroll-pos">
+        {% for item in dir_list %}
+        <li class = "item">
+            <button id = {{item}} onclick="return selecting(this.id)" style="padding: 0px; border: solid #E5E2E2">
+                <img src="../static/img/table_imgs/{{item}}" id = {{item}} height = 100px; width = auto; style="display: block; margin: auto;" >
+            </button>
+        </li>
+        {% endfor %}
+    </div>
+
+    <form action="/recommend" method="post" onsubmit="return loading()">
+        <div class="cp_ipradio">
+            <ul>
+                <li class="list_item">
+                    <input type="radio" class="option-input" name="cpipr08" id="c_rb1" value="modern_living">
+                    <label for="c_rb1" style="font-size: 2.0em;">モダン風</label>
+                </li>
+                
+                <!--<li class="list_item">
+                    <input type="radio" class="option-input" name="cpipr08" id="c_rb2" value="modern_office">
+                    <label for="c_rb2" style="font-size: 2.0em;">モダン風オフィス</label>
+                </li>
+                -->
+                <li class="list_item">
+                    <input type="radio" class="option-input" name="cpipr08" id="c_rb3" value="cute_living">
+                    <label for="c_rb3" style="font-size: 2.0em;">キュート風</label>
+                </li>
+                
+            </ul>
+        </div>
+
+        <div class="button-div">
+            <input type="submit" name="send" class="reset flat border" value="送信">
+            <input type="text" id="submitid" name="submit-form" hidden>
+        </div>
+    </form>
+</main>
+
+<script language="javascript" type="text/javascript">
+
+    function selecting(item_name) {
+
+        if (document.getElementById('submitid').value != ""){
+            //送信するinputタグが「]ならば，初期状態
+            //それ以外は，以前の緑枠を消す
+            let temp_name = document.getElementById('submitid').value;
+            document.getElementById(temp_name).style.border = 'solid #E5E2E2';
+        }
+        
+        //送信のところにセット
+        document.getElementById('submitid').value = item_name;
+        console.log(document.getElementsByName('submit-form').value);//submitidタグに挿入されたかを確認
+
+        //選択画像の色を変更
+        document.getElementById(item_name).style.border = 'solid 5px #008040';
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    function loading() {
+        var radioFlag = false;
+        var radioList = document.getElementsByName("cpipr08");
+        for(var i = 0; i < radioList.length; i++){
+            if (radioList[i].checked) {
+                radioFlag = true
+                break;
+            }
+        }
+        
+        if(document.getElementById('submitid').value === '' || radioFlag === false){
+            document.getElementById("NotifyMassage").click();
+            return false
+        }else{
+            //リロード画面スタート
+            $("#overlay").fadeIn(100);
+            return true
+        }
+
+    }
+</script>
+
+</body>
+</html>

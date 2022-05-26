@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/radio-button.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <style>
+        /********************************************
+        * Now Loading
+        ********************************************/
+        #overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px #ddd solid;
+            border-top: 4px #999 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(359deg); }
+        }
+        .is-hide{
+            display:none;
+        }
+
+        a.main-title:link, a.main-title:visited, a.main-title:hover, a.main-title:active {
+            /*メインタイトル（推薦システム）*/
+            font-family: "Rounded Mplus 1c";
+            font-weight: 500;
+            color: white;
+            text-decoration:none;
+            font-size: 24px;
+        }
+
+        /*送信ボタン　の位置*/
+        .button-div{
+            position: relative; /* 今の位置を基準 */
+            top: -175px; /* 上から10px */
+            
+        }
+        /*ページ全体の調整*/
+        plate,html,body{
+            height: 100%;
+            width:100%;
+            font-size : 100%;
+            margin-left : auto;
+            margin-right : auto;
+            text-align : center;
+            background-color: rgb(229, 226, 226);
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        /*ボタン実験*/
+
+        .flat.border {
+        position: relative;
+        text-align: center;
+        /* 中央揃え */
+        display: block;
+        margin: 0 auto;
+        /* 幅の指定 */
+        width: 100%;
+        height: 60px;
+        max-width: 600px;
+        box-sizing: border-box;
+        padding: 10px;
+        /* 色の指定 */
+        background: linear-gradient(135deg, #0066ff, #0066ff);
+        color: #fff;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        border: 2px solid #0066ff;
+        background: #fff;/*デフォルトのボタンの色*/
+        color: #0066ff;
+        font-size: 23px;
+        font-family: "Rounded Mplus 1c";
+        }
+        .flat.border:hover {
+        /*マウスを近づけたときの色*/
+        background: #0066ff;
+        color: #fff;
+        }
+        .flat.border:active, .flat.border:focus {
+        top: 2px;
+        }
+        .percent{
+            /*background-color: red;*/
+            height: 200px;
+            width: 500px;
+            position: relative;
+            left: 700px;
+            top: 100px;
+        }
+
+        .pre-name{
+            /*background-color: aqua;*/
+            text-align: center;
+            position: relative;
+            top: 20%;
+            font-family: "Rounded Mplus 1c";
+            font-weight: 500;
+            font-size: 30px;
+            left: -30px;
+        }
+
+        /*画像のドラッグ＆ドロップ*/
+        #dragDropArea{
+        background-color: #f4f4f4;
+        margin: 10px;
+        padding: 10px;
+        border: #ddd dashed 5px;
+        min-height: 200px;
+        text-align: center;
+
+        position: relative;
+        left: 10%;
+        top: -190px;
+        height: 400px;
+        width: 500px;
+        }
+        #dragDropArea p{
+            color: #999;
+            font-weight: bold;
+            font-size: 14px;
+            font-size: 1.4em;
+        }
+        #dragDropArea .drag-drop-buttons{
+            margin-top: 20px;
+            font-size: 12px;
+            font-size: 1.2em;
+        }
+        .drag-drop-buttons input{
+            margin: auto;
+        }
+
+        #previewArea img {
+        width: 150px;
+        margin: 10px;
+        border: solid 1px silver;
+        }
+
+        .to-Anosystem{
+            font-family: "Rounded Mplus 1c";
+            font-weight: 300;
+            font-size: 20px;
+            left: -30px;
+        }
+
+        .result-box{
+            /*"font-family:Rounded Mplus 1c; font-weight: 400; font-size: 30px; "*/
+            position: relative;
+            top: 30%;
+            font-family: "Rounded Mplus 1c";
+            font-weight: 400;
+            font-size: 30px;
+        }
+    </style>
+
+
+    <title>テクスチャ調査システム</title>
+    </head>
+<body>  
+<header>
+    <div class="navbar navbar-dark bg-dark shadow-sm" style="line-height: 2.00;">
+        <div class="container">
+            <div class="navbar-brand d-flex align-items-center">
+                <a href="/material" class="main-title">テクスチャ調査システム</a>
+            </div>
+            <!--
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a href="/" class="btn btn-outline-light">家具推薦システム</a>
+            </div>
+            -->
+        </div>
+    </div>
+</header>
+
+<!-- loding -->
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+
+<div class="modal fade" id="dlog">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-warning" role="alert">
+            画像を入れてください
+        </div>
+    </div>
+</div>
+<button type="button" id="NotifyMassage" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dlog" hidden></button>
+
+<main class="plate"> 
+    <p></p>
+    
+    <div class="percent">
+        <p class="pre-name">
+            <div class="card text-center">
+                <div class="card-header" style="height: 50px;">
+                    <span style="font-family:Rounded Mplus 1c; font-weight: 500; font-size: 25px;">分類結果</span>
+                </div>
+                <div class="card-body" style="height: 200px;">
+                        {% if pre_chair %}
+                            <p class="result-box">
+                            「{{pre_chair}}」と推測
+                            </p>
+                        {% endif %}
+                    </p>
+                    
+                </div>
+            </div>
+        </p>
+    </div>
+
+    <form action="/material" method="post" enctype="multipart/form-data" onsubmit="return loading()">
+        <div id="dragDropArea">
+            <div class="drag-drop-inside">
+                <p class="drag-drop-info">ここにファイルをドロップ</p>
+                <p>または</p>
+                <p class="drag-drop-buttons">
+                    <input id="fileInput" type="file" accept="image/*" value="ファイルを選択" name="photo" onChange="photoPreview(event)">
+                </p>
+                <div id="previewArea">
+                    {% if img_name %}
+                        <img id = "preimg" src="../static/img/00_result_imgs/{{img_name}}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="button-div">
+            <input type="submit" name="send" class="reset flat border" value="送信">
+            <input type="text" id="submitid" name="submit-form" hidden>
+        </div>
+    </form>
+
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    function loading() {
+        //window.alert(document.getElementById('fileInput').value)
+        if(document.getElementById('fileInput').value === ''){
+            document.getElementById("NotifyMassage").click();
+            return false
+        }else{
+            //リロード画面スタート
+            $("#overlay").fadeIn(100);
+            return true
+        }
+
+    }
+</script>
+
+
+<script>
+    var fileArea = document.getElementById('dragDropArea');
+    var fileInput = document.getElementById('fileInput');
+    fileArea.addEventListener('dragover', function(evt){
+    evt.preventDefault();
+    fileArea.classList.add('dragover');
+    });
+    fileArea.addEventListener('dragleave', function(evt){
+        evt.preventDefault();
+        fileArea.classList.remove('dragover');
+    });
+    fileArea.addEventListener('drop', function(evt){
+        evt.preventDefault();
+        fileArea.classList.remove('dragenter');
+        var files = evt.dataTransfer.files;
+        console.log("DRAG & DROP");
+        console.table(files);
+        fileInput.files = files;
+        photoPreview('onChenge',files[0]);
+    });
+    function photoPreview(event, f = null) {
+    var file = f;
+    if(file === null){
+        file = event.target.files[0];
+    }
+    var reader = new FileReader();
+    var preview = document.getElementById("previewArea");
+    var previewImage = document.getElementById("previewImage");
+
+    if(previewImage != null) {
+        preview.removeChild(previewImage);
+    }
+    reader.onload = function(event) {
+        if (document.getElementById("preimg") != null){
+            document.getElementById("preimg").style = "display:none";
+        }
+        var img = document.createElement("img");
+        img.setAttribute("src", reader.result);
+        img.setAttribute("id", "previewImage");
+        preview.appendChild(img);
+    };
+
+    reader.readAsDataURL(file);
+    }
+
+</script>
+
+</body>
+</html>

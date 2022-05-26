@@ -1,0 +1,82 @@
+/*ラジオボタン　スタート*/
+
+.cp_ipradio {
+    width: 90%;
+    /*margin: 2em 50em;*/
+    text-align: left;
+    position: relative;
+    width: 450px;
+    /*left: 55%;*/
+    top: -350px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 35%;
+}
+.cp_ipradio ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.cp_ipradio .list_item {
+    position: relative;
+}
+.cp_ipradio .list_item:hover label {
+    /*カーソルを持って行った時の文字の色*/
+    color: #094;
+    /*color: #0066ff;*/
+}
+.cp_ipradio .list_item:hover label::before {
+    /*カーソルを持って行った時のボタンの色*/
+    margin-right: 2em;
+    border: 0.4em solid #094;
+    /*border: 0.4em solid #0066ff;*/
+}
+.cp_ipradio .option-input {
+    display: none;
+}
+.cp_ipradio .option-input:checked + label {
+    /*選択中の文字*/
+    color: #094;
+    /*color: #0066ff;*/
+}
+.cp_ipradio .option-input:checked + label::before {
+    /*選択中のボタンの色*/
+    margin-right: 2em;
+    border: 0.4em solid #094;
+    /*border: 0.4em solid #0066ff;*/
+    background: #094;
+    /*background: #0066ff;*/
+}
+.cp_ipradio label {
+    display: -webkit-box;
+    display: flex;
+    padding: 1em 0;
+    cursor: pointer;
+    -webkit-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+    text-transform: uppercase;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.cp_ipradio label::before {
+    /*ベースのボタンの色*/
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.625em;
+    content: '';
+    -webkit-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+    border: 0.4em solid #4b4848;
+    border-radius: 50%;
+}
+.cp_ipradio .option-input:disabled + label {
+    /*選択させない際に使う（今回は使用しない）*/
+    cursor: not-allowed;
+    color: #b8b7b7;
+}
+.cp_ipradio .option-input:disabled + label::before {
+    /*選択させない際に使う（今回は使用しない）*/
+    cursor: not-allowed;
+    border: 0.4em solid #b8b7b7;
+}

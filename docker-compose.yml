@@ -1,0 +1,12 @@
+version: "3" # composeファイルのバージョン
+services: 
+    app: # サービス名
+        build: . # ビルドに使うDockerfileの場所
+        tty: true 
+        stdin_open: false
+        ports:
+            - 3000:3000
+        environment:
+            FLASK_APP: "app.py"
+            FLASK_ENV: "development"
+        command: "flask run --host=0.0.0.0 --port=3000"

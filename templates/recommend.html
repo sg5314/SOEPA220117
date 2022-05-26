@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+
+    <style>
+        .img-boxes{/*画像軍全体*/
+            height: 550px;
+            margin: 10px;
+            position: relative;
+        }
+
+        .choisebox{
+            height: 250px;
+            width: 300px;
+            /*margin: 50px;*/
+            position: absolute;
+            top: 24%;
+            left: 15%;
+            -webkit-transform : translate(-50%,-50%);
+            transform : translate(-50%,-50%);
+        }
+
+        .recomendbox{/*推薦画像*/
+            height: 500px;
+            width: 600px;
+            margin: 50px;
+            position: absolute;
+            top: 38%;
+            left: 65%;
+            -webkit-transform : translate(-50%,-50%);
+            transform : translate(-50%,-50%);
+        }
+
+        .selecting{
+            position: relative;
+            border: solid 5px #696969;
+            height: 250px;
+            width: 300px;
+            padding: 20px;
+        }
+
+        .ranking{
+            position: relative;
+            border: solid 5px #696969;
+            height: 160px;
+        }
+        .ranking_title{
+        position: absolute;
+        top: 45%;
+        left: 10%;
+        transform: translateX(-50%) translateY(-30%);
+        font-size: 16px;
+        font-family: "Rounded Mplus 1c";
+        background: rgb(229, 226, 226);
+        /*color: #95ccff;*/
+        color : #696969;
+        font-weight: bold;
+        font-size: 25px;
+        }
+        .ranking_chair{
+        text-align: center;
+        height: 140px;
+        position: absolute;
+        top: 3%;
+        right: 50%;
+        /*
+        transform: translateX(-90%);
+        transform: translateY(3%);
+        */
+        }
+        .ranking_cabinet{
+        position: absolute;
+        top: 3%;
+        right: 0px;
+        height: 140px;
+        transform: translateX(-30%);
+        }
+
+        .choise-img{/*選択した画像*/
+            display: inline-block;
+            background: rgba(255, 0, 0, 0.4);
+            text-align: right;
+            /*width: 100%;*/
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            -webkit-transform : translate(-50%,-50%);
+            transform : translate(-50%,-50%);
+        }
+        .box-title{/*文字*/
+            font-size: 25px;
+            font-family: "Rounded Mplus 1c";/*var(--bs-font-monospace)!important*/
+            display: inline-block;
+            /*left: 10px;*/
+            line-height: 1;
+            background: rgb(229, 226, 226);
+            /*color: #95ccff;*/
+            color : #696969;
+            font-weight: bold;
+        }
+        .box-title1{
+            font-size: 25px;
+            font-family: "Rounded Mplus 1c";/*var(--bs-font-monospace)!important*/
+            display: inline-block;
+            position: relative;
+            left: 10px;
+            line-height: 1;
+            background: rgb(229, 226, 226);
+            /*color: #95ccff;*/
+            color : #696969;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        a.main-title:link, a.main-title:visited, a.main-title:hover, a.main-title:active {
+            /*メインタイトル（推薦システム）*/
+            font-family: "Rounded Mplus 1c";
+            font-weight: 500;
+            color: white;
+            text-decoration:none;
+            font-size: 24px;
+        }
+
+        .top-button-cha{/*トップへ戻る　ボタンの文字*/
+            font-size: 15px;
+            font-family: "Rounded Mplus 1c";
+        }
+
+        /*ページ全体の調整*/
+        plate,html,body{
+        height: 100%;
+        width:100%;
+        font-size : 100%;
+        margin-left : auto;
+        margin-right : auto;
+        text-align : center;
+        background-color: rgb(229, 226, 226);
+        overflow-x: hidden;
+        overflow-y: hidden;
+        }
+
+        /*ボタン作成*/
+
+        .btn,
+        a.btn,
+        button.btn {
+        font-size: 1.0rem;
+        font-weight: 700;
+        line-height: 1.0;
+        position: relative;
+        display: inline-block;
+        padding: 1rem 4rem;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        color: #212529;
+        border-radius: 0.5rem;
+        background-color: rgb(229, 226, 226);
+        }
+        a.btn-flat {
+        overflow: hidden;
+
+        padding: 1.5rem 6rem;
+
+        color: #fff;
+        border-radius: 0;
+        background: #000;
+        }
+
+        a.btn-flat span {
+        position: relative;
+        z-index: 1;
+        }
+
+        a.btn-flat:before {
+        position: absolute;
+        top: 0;
+        left: calc(-100% + 10px);
+
+        width: 100%;
+        height: 100%;
+
+        content: '';
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        -webkit-transform: translateX(0) translateY(0);
+        transform: translateX(0) translateY(0);
+
+        background: #094;
+        }
+
+        a.btn-flat:after {
+        position: absolute;
+        top: 0;
+        right: calc(-100% + 10px);
+
+        width: 100%;
+        height: 100%;
+
+        content: '';
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+        -webkit-transform: translateX(0) translateY(0);
+        transform: translateX(0) translateY(0);
+
+        background: #094;
+        }
+
+        a.btn-flat:hover:before {
+        -webkit-transform: translateX(50%) translateY(0);
+        transform: translateX(50%) translateY(0);
+        }
+
+        a.btn-flat:hover:after {
+        -webkit-transform: translateX(-50%) translateY(0);
+        transform: translateX(-50%) translateY(0);
+        }
+
+    </style>
+
+    <title>家具推薦システム</title>
+    </head>
+<body>  
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm" style="line-height: 2.00;">
+            <div class="container">
+                <div class="navbar-brand d-flex align-items-center">
+                    <a href="/" class="main-title">家具推薦システム</a>
+                </div>
+            <span class="navbar-text"></span>
+            <!-- <a href="/" class="btn btn-flat"><span class="top-button-cha">トップページに戻る</span></a> -->
+            </div>
+        </div>
+</header>
+
+<main> 
+
+    <div class="img-boxes">
+        <div class="choisebox">
+            <span class="box-title">　選択した机　</span>
+            <div class="selecting">
+                <img src="../static/img/table_imgs/0006.jpg" alt="" id="choise-img" height = 200px; width = auto; style="padding: auto;"><!-- {{select_img_name}} -->
+            </div>
+        </div>
+
+        <div class="recomendbox"><span class="box-title1">{{select_scene_strname}}　推薦アイテム</span>
+                <div class="ranking">
+                    <span class="ranking_title">No.1</span>
+                    <img class="ranking_chair" src="../static/img/chair_imgs/{{recom_dic['no1_chair']}}" alt="" height="140px" width = auto;/>
+                    <img class="ranking_cabinet" src="../static/img/cabinet_imgs/{{recom_dic['no1_cabinet']}}" alt="" height="140px" width = auto;/>
+                </div>
+                <div class="ranking">
+                    <span class="ranking_title">No.2</span>
+                    <img class="ranking_chair" src="../static/img/chair_imgs/{{recom_dic['no2_chair']}}" alt="" height="140px" width = auto;/> 
+                    <img class="ranking_cabinet" src="../static/img/cabinet_imgs/{{recom_dic['no2_cabinet']}}" alt="" height="140px" width = auto;/>
+                </div>
+                <div class="ranking">
+                    <span class="ranking_title">No.3</span>
+                    <img class="ranking_chair" src="../static/img/chair_imgs/{{recom_dic['no3_chair']}}" alt="" height="140px" width = auto;/>
+                    <img class="ranking_cabinet" src="../static/img/cabinet_imgs/{{recom_dic['no3_cabinet']}}" alt="" height="140px" width = auto;/>
+                </div>
+        </div>
+    </div>
+
+    
+</main>
+</body>
+</html>
