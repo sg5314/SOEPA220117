@@ -4,8 +4,9 @@
 [知的オフィス環境推進協議会](http://mwind.jp/soepa/index.html)
 
 # DEMO
+#### 家具推薦の様子
+![SOEPA202201](https://user-images.githubusercontent.com/88835817/170429369-e2beb82d-e354-4fea-9911-7d9099258f4a.gif)
 
- 
 # Installation & Usage
 
 ### 1.プロジェクトをクローン
