@@ -14,6 +14,7 @@
 ![SOEPA202201](https://user-images.githubusercontent.com/88835817/170429369-e2beb82d-e354-4fea-9911-7d9099258f4a.gif)
 
 #### テクスチャ調査システム
+![SOEPA202201_LBP](https://user-images.githubusercontent.com/88835817/171096507-c1166acf-b4eb-46f4-907c-ea74e777dbc7.gif)
 
 
 # Installation & Usage
