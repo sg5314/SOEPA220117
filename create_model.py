@@ -1,23 +1,11 @@
 import numpy as np
-from numpy.core.fromnumeric import mean
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn import tree
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import load_breast_cancer
-import pydotplus
-from sklearn.externals.six import StringIO
-from scipy import genfromtxt
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 import xgboost as xgb
-import json
-import graphviz
 import joblib
 import os
 import re
-from sklearn.model_selection import cross_val_score, KFold
 from collections import Counter
 
 

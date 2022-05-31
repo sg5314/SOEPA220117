@@ -13,9 +13,6 @@ import random
 from collections import Counter
 
 
-now_scene_int = 0
-
-
 
 # ページに表示する「机」の画像のパス
 dir_list = sorted(os.listdir(os.getcwd() +'/static/img/table_imgs/'))
@@ -413,31 +410,6 @@ def recommend():
 def index():
     return render_template('select_items_page.html', dir_list = dir_list)
 
-
-@app.route('/scene')
-def scene():
-    return render_template('select_scene_page.html',scene_now_int = now_scene_int, scene_now_num = str(now_scene_int).zfill(4)+'.jpg', flag = 'NO')
-
-
-@app.route('/selectscene/',methods=['GET', 'POST'])
-def selectscene():
-    if request.method == 'POST':
-        if request.form['send'] == '好きです':
-            pass
-        else:
-            pass
-        
-        global now_scene_int
-        now_scene_int+=1
-
-        temp = str(now_scene_int).zfill(4)+'.jpg'
-        if now_scene_int == (101):
-            return render_template('select_scene_page.html',scene_now_int = now_scene_int, scene_now_num = temp, flag = 'OK')
-        else:
-            return render_template('select_scene_page.html',scene_now_int = now_scene_int, scene_now_num = temp, flag = 'NO')
-
-    else:
-        return redirect('/')
 
 
 # 材質特徴量のページ
